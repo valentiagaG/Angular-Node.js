@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+footer {
+    background-image: url('https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background-size: cover; /* Puedes ajustar esto según tus preferencias */
+    background-repeat: no-repeat;
+    background-position: center 62%;
+    color: #ffffff; /* Ajusta el color del texto para que sea legible en la imagen */
+    /* height: 50px; */
+  }

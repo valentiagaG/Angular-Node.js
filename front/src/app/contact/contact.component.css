@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1, label{
+    font-family: 'Noto Sans', sans-serif;
+}

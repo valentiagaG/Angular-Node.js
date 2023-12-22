@@ -1,0 +1,135 @@
+<section class=" bg-gray-200">
+    <div class="flex flex-col justify-center items-center px-6 py-8 ">
+      <div class="bg-white w-2/4 p-6 rounded-lg">
+        <div class="">
+          <img
+            class="mx-auto h-12 w-auto"
+            src="https://pbs.twimg.com/profile_images/717392196014440448/W6GY_MFe_400x400.jpg"
+            alt="Your Company"
+          />
+          <h2
+            class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
+          >
+            Sign in
+          </h2>
+        </div>
+    
+        <div class="mt-10">
+          <form class="space-y-6" action="#" method="POST">
+            <div class="flex space-x-2 w-full">
+              <div class="w-full">
+                <label 
+                  for="name"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >Name</label
+                >
+                <div class="mt-2">
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    [(ngModel)]="name"
+                    required
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+              <div class="w-full">
+                <label
+                  for="userName"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >User Name</label
+                >
+                <div class="mt-2">
+                  <input
+                    id="userName"
+                    name="userName"
+                    [(ngModel)]="userName"
+                    type="text"
+                    required
+                    class="block  rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- <div>
+              <label
+                for="email"
+                class="block text-sm font-medium leading-6 text-gray-900"
+                >Email address</label
+              >
+              <div class="mt-2">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="email@address.com"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div> -->
+            <div>
+                <div class="flex items-center justify-between">
+                    <label
+                      for="password"
+                      class="block text-sm font-medium leading-6 text-gray-900"
+                      >Password</label
+                    >
+                  </div>
+                  <div class="mt-2">
+                    <input
+                      id="password"
+                      name="password"
+                      type="password"
+                      [(ngModel)]="password"
+                      autocomplete="current-password"
+                      required
+                      pattern="^(?=.*\d).{6,}$"
+                      title="La contraseña debe tener al menos 6 caracteres, incluyendo al menos un número."
+                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      placeholder=" *****"
+                    />
+                  </div>
+            </div>
+    
+            <div>
+              <div class="flex items-center justify-between">
+                <label
+                  for="reppassword"
+                  class="block text-sm font-medium leading-6 text-gray-900"
+                  >Repeat Password</label
+                >
+              </div>
+              <div class="mt-2">
+                <input
+                  id="reppassword"
+                  name="reppassword"
+                  type="password"
+                  [(ngModel)]="repass"
+                  autocomplete="current-password"
+                  required
+                  pattern="^(?=.*\d).{6,}$"
+                  title="La contraseña debe tener al menos 6 caracteres, incluyendo al menos un número."
+                  placeholder=" *****"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  
+                  />
+                  <div *ngIf="repass !== password" class="text-red-500 text-xs mt-1">Las contraseñas no coinciden.</div>
+              </div>
+            </div>
+            <div>
+              <button (click)="signin()" routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page"
+                type="submit"
+                class="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 mb-3 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  

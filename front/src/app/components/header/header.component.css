@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tituloHeader{
+    font-family: 'Great Vibes', cursive;
+    font-size: xx-large;
+}
+

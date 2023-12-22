@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1{
+    font-size: xx-large;
+    text-align: center;
+}
+
+.imgAbout0{
+    height: 350px;
+    padding-right: 10px;
+}
+
+p, h3, h1{
+    font-family: 'Noto Sans', sans-serif;
+}
