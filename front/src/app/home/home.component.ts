@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../components/header/header.component';
 import { FormsModule } from '@angular/forms';
-import {NgIf} from '@angular/common';
+import {NgFor, NgIf} from '@angular/common';
+import { HotelsService } from '../services/hotels/hotels.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HeaderComponent, FormsModule, NgIf],
+  imports: [HeaderComponent, FormsModule, NgIf, NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -17,6 +18,8 @@ export class HomeComponent{
   responseData: any;
 
 
+  public hotelService = inject (HotelsService);
+  
   changeImage() {
     // Cambiar el índice de la imagen cuando se activa el evento mouseover
     this.currentIndex = (this.currentIndex % 4) + 1;

@@ -11,7 +11,7 @@
             <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Explore the whole collection of open-source web components and elements built with the utility classes from Tailwind</p>
         </div> 
 
-        <div class="grid gap-3 mb-6 lg:mb-16 md:grid-cols-4">
+        <!-- <div class="grid gap-3 mb-6 lg:mb-16 md:grid-cols-4">
             <div class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700">
                 
                 <div class="p-5">
@@ -101,13 +101,13 @@
                     </h3>
                     <a href="#">
                         <div id="default-carousel" class="relative w-full" data-carousel="static">
-                            <!-- Carousel wrapper -->
+                             Carousel wrapper 
                             <div class="relative overflow-hidden rounded-lg" (mouseenter)="changeImage()" (mouseleave)="clearTimer(); resetImage()">
-                              <!-- Item 1 -->
+                              Item 1 
                               <div *ngIf="currentIndex === 1" class=" ease-in-out" data-carousel-item>
                                 <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/450540516.jpg?k=e5f90ce0bb661e85a0339f363de98ebab68bb38ee0b0b0c45c0263af7e6087bd&o=&hp=1" alt="...">
                               </div>
-                              <!-- Item 2 -->
+                             
                               <div *ngIf="currentIndex === 2" class=" ease-in-out" data-carousel-item>
                                 <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/480982427.jpg?k=c7bfcfbd34119e23273f222ffe90251abe0cd91454c2726a065578fe54025a94&o=&hp=1" alt="...">
                               </div>
@@ -120,27 +120,6 @@
                             </div>
                         </div>
 
-                        <!-- <div id="default-carousel" class="relative w-full" data-carousel="slide">
-                           
-                            <div class="relative h-56 overflow-hidden rounded-lg md:h-96" (mouseover)="changeImage()">
-                        
-                              <div *ngIf="currentIndex === 1" class="duration-100 ease-in-out" data-carousel-item>
-                                <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/450540516.jpg?k=e5f90ce0bb661e85a0339f363de98ebab68bb38ee0b0b0c45c0263af7e6087bd&o=&hp=1" alt="...">
-                              </div>
-                            
-                              <div *ngIf="currentIndex === 2" class="duration-100 ease-in-out" data-carousel-item>
-                                <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/480982427.jpg?k=c7bfcfbd34119e23273f222ffe90251abe0cd91454c2726a065578fe54025a94&o=&hp=1" alt="...">
-                              </div>
-                              <div *ngIf="currentIndex === 3" class="duration-100 ease-in-out" data-carousel-item>
-                                <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/480982399.jpg?k=dd49720864d535c326be6c3a5a1c33b5b411ede0848949d0552ff99240c34393&o=&hp=1" alt="...">
-                              </div>
-                              <div *ngIf="currentIndex === 4" class="duration-100 ease-in-out" data-carousel-item>
-                                <img src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/480982237.jpg?k=74b130c18eb592fe75af0d9ce2d3990442727c0179b4cb5fc82ccecd716703dc&o=&hp=1" alt="...">
-                              </div>
-                            </div>
-                        </div> -->
-                        
-                        <!-- <img class="w-full rounded-lg sm:rounded-none sm:rounded-l-lg" src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/450540516.jpg?k=e5f90ce0bb661e85a0339f363de98ebab68bb38ee0b0b0c45c0263af7e6087bd&o=&hp=1" alt="Sofia Avatar"> -->
                     </a>
                     <span class="text-gray-500 dark:text-gray-400">Description</span>
                     <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">0130 Daybreak Ridge, Beaver Creek, CO 81620, United States of America</p>
@@ -160,6 +139,48 @@
                     </ul>
                 </div>
             </div>  
-        </div>  
+        </div>   -->
+        
+            <ul class="grid gap-3 mb-6 lg:mb-16 md:grid-cols-4">
+              @for (hotel of hotelService.hotels(); track hotel.id){
+              <li>
+                <div class=" items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 ">
+                        
+                    <div class="p-5 ">
+                        <h3 class="text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+                            <a href="#">{{ hotel.name }}</a>
+                        </h3>
+                        <a href="#">
+                            <img class=" object-cover rounded-lg sm:rounded-none sm:rounded-l-lg" src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/450970929.jpg?k=a8d0279068034128eb9178737cf84b2191515be492be8a3147d3b3f7e90b76d0&o=&hp=1" alt="Bonnie Avatar">
+                        </a>
+                        <span class="text-gray-500 dark:text-gray-400"> {{ hotel.description }}</span>
+                        <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400"> {{ hotel.address }}</p>
+                        <!-- <ul class="flex space-x-4 sm:mt-0">
+                            <li>
+                                <img src="../../assets/img/estrellaSVG.svg" alt="">
+                            </li>
+                            <li>
+                                <img src="../../assets/img/estrellaSVG.svg" alt="">
+                            </li>
+                            <li>
+                                <img src="../../assets/img/estrellaSVG.svg" alt="">
+                            </li>
+                            <li>
+                                <img src="../../assets/img/estrellaSVG.svg" alt="">
+                            </li>
+                        </ul> -->
+                        <ul class="flex space-x-4 sm:mt-0">
+                            <li *ngFor="let star of [].constructor(hotel.punt); let i = index">
+                              <img src="../../assets/img/estrellaSVG.svg" alt="Estrella {{ i + 1 }}">
+                            </li>
+                          </ul>
+                    </div>
+                </div> 
+              </li>
+              } @empty {
+              <h3>Cargando</h3>
+              }
+            </ul>
+       
     </div>
   </section>

@@ -5,6 +5,7 @@ const attractions = require('./modulos/attractions/rutas');
 const clientes = require ('./modulos/clientes/rutas');
 const usuarios = require('./modulos/usuarios/rutas');
 const auth = require('./modulos/auth/rutas');
+const hotels = require('./modulos/hotels/rutas');
 const cors = require('cors');
 
 const app= express();
@@ -23,5 +24,6 @@ app.use('/api/clientes', clientes)
 app.use('/api/usuarios', usuarios)
 app.use('/api/auth', auth)
 app.use('/api/attractions', attractions);
+app.use('/api/hotels', hotels);
 
 module.exports = app;
