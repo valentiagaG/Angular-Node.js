@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
-import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './components/home/home.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { AboutComponent } from './components/about/about.component';
 import { SigninComponent } from './components/header/signin/signin.component';
 import { LoginComponent } from './components/header/login/login.component';
-import { AttractionsComponent } from './attractions/attractions.component';
+import { AttractionsComponent } from './components/attractions/attractions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuard } from './guards/auth.guard';
 

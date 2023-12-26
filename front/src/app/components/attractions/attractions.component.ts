@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AttractionsService } from '../services/attractionService/attractions.service';
+import { AttractionsService } from '../../services/attractionService/attractions.service';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';

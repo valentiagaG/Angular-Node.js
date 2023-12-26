@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { ContactComponent } from '../../contact/contact.component';
-import { AboutComponent } from '../../about/about.component';
-import { HomeComponent } from '../../home/home.component';
+import { ContactComponent } from '../contact/contact.component';
+import { AboutComponent } from '../about/about.component';
+import { HomeComponent } from '../home/home.component';
 import { SigninComponent } from './signin/signin.component';
 import { LoginComponent } from './login/login.component';
-import { AttractionsComponent } from '../../attractions/attractions.component';
+import { AttractionsComponent } from '../attractions/attractions.component';
 
 @Component({
   selector: 'app-header',
