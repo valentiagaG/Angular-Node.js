@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,code{font:15px/22px arial,sans-serif}
+
+
+p{margin:11px 0 22px;overflow:hidden}
+
+div{
+    padding-top: 10%;
+    padding-left: 10%;
+}

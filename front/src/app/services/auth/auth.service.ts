@@ -3,6 +3,7 @@ import { Observable, delay, of } from 'rxjs';
 import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../interfaces/req-res';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   // private _currentUser = signal<User|null>(null)
   // private _authStatus = signal<AuthStatus>();
 
-  constructor() {
+  constructor(private router: Router) {
     
    }
 
@@ -35,9 +36,9 @@ export class AuthService {
         (response) => {
           alert('User logged in');
           this.rta = true;
+          this.router.navigate(['/']);
         },
-        (error)=>{
-          alert('Los datos son incorrectos');
+        (error)=>{ 
           this.rta = false;
         }
       );
@@ -55,12 +56,12 @@ export class AuthService {
     .pipe(delay(1000))
       .subscribe(
         (response) => {
-          alert('User signed in');
+          // alert('User signed in');
           //redireccionar al login
-          
+          this.router.navigate(['/login']);
         },
         (error)=>{
-          alert('Los datos son incorrectos');
+          
           
         }
       );
@@ -70,3 +71,5 @@ export class AuthService {
   
 
 }
+
+
