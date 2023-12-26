@@ -3,8 +3,9 @@ import { Observable, delay, map, of } from 'rxjs';
 import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../interfaces/req-res';
-import { Router } from '@angular/router';
+
 import { CookieOptions, CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,10 +13,8 @@ export class AuthService {
   
   private readonly baseUrl:string = environments.baseUrl;
   private http = inject( HttpClient)
-  private rta = false;
+  private rta:boolean = false;
   private cookies = inject(CookieService);
-  // private _currentUser = signal<User|null>(null)
-  // private _authStatus = signal<AuthStatus>();
 
   constructor(private router: Router) {
     
@@ -23,7 +22,10 @@ export class AuthService {
 
   //esta funcion retorna un observable de un booleano
   getAuthToken(): Observable<boolean>{
-    return of(this.rta);
+    if (this.cookies.get("rta")==="true")
+      return of(true);
+    else
+      return of (false);
   }
 
   login(userName: string, password: string){
@@ -35,12 +37,10 @@ export class AuthService {
     .pipe(delay(1000), 
           map((response: any) => response.body))
       .subscribe(
-        (token: string) => {
+        (token) => {
           alert('User logged in');
           this.rta = true;
           this.router.navigate(['/']);
-    
-          // Ahora puedes utilizar 'token' como desees, por ejemplo, guardándolo en una variable de clase.
           this.guardarToken(token);
         },
         (error)=>{ 
@@ -49,12 +49,30 @@ export class AuthService {
       );
   }
 
-  private guardarToken(token: string): void {
+  getIdToken(){
+    return this.cookies.get("token");
+  }
+
+  estaLogueado(){
+    return this.cookies.get("token");
+  }
+
+  logOut(){
+    //   const expirationDate = new Date();
+    // expirationDate.setDate(expirationDate.getDate() + 30);
+
+    // this.cookies.set("token", '', { expires: expirationDate });
+    this.cookies.set("rta", "false");
+    this.cookies.set("token", "");
+    console.log('Log out perro');
+    this.router.navigate(['/']);
+    this.rta = false;
+  }
+
+  private guardarToken(token: any): void {
     console.log(token);
-    
-    // Aquí puedes realizar acciones adicionales, como almacenar el token en localStorage o en una variable de clase.
-    // Ejemplo:
-    // this.authService.setToken(token);
+    this.cookies.set("token", token);
+    this.cookies.set("rta", "true");
   }
 
   signin(name: string, userName: string, password: string){

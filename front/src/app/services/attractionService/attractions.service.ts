@@ -27,7 +27,7 @@ export class AttractionsService {
   constructor() {
     this.http.get<AttractionsList>('http://localhost:4000/api/attractions')
       .pipe(delay(1000))
-      .subscribe(res => {
+      .subscribe((res: { body: any; }) => {
         this.#state.set({
           loading: false,
           attractions: res.body,
@@ -61,7 +61,7 @@ export class AttractionsService {
     this.http.post<AttractionsList>('http://localhost:4000/api/attractions', this.data)
       .pipe(delay(1000))
       .subscribe(
-        (response) => {
+        (response: any) => {
           console.log('Atraccion agregada');
         }
       );

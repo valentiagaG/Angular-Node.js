@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { SigninComponent } from '../signin/signin.component';
-import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../../services/auth/auth.service';
-import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',

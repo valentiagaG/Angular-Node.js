@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { FormsModule } from '@angular/forms';
 import {NgFor, NgIf} from '@angular/common';
 import { HotelsService } from '../../services/hotels/hotels.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',

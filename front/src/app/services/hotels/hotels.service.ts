@@ -30,7 +30,7 @@ export class HotelsService {
   constructor() { 
     this.http.get<HotelsList>('http://localhost:4000/api/hotels')
       .pipe(delay(1000))
-      .subscribe(res => {
+      .subscribe((res: { body: any; }) => {
         this.#state.set({
           loading: false,
           hotels: res.body,

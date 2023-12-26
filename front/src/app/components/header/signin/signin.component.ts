@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
 import { NgIf } from '@angular/common';
 import { LoginComponent } from '../login/login.component';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({

@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { AttractionsService } from '../../services/attractionService/attractions.service';
-import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-attractions',
