@@ -9,7 +9,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
