@@ -48,7 +48,7 @@ async function agregar(req, res){
     }
     catch(err){
         
-        respuesta.error(req, res, err, 500);
+        respuesta.error(req, res, err, 402);
     }
 };
 

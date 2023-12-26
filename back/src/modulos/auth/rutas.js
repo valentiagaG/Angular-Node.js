@@ -11,7 +11,8 @@ async function login(req, res, next){
         respuesta.success(req, res, token, 200);
     }
     catch(err){
-        next(err);
+        respuesta.error(req, res, 'Datos inválidos', 401);
+        // next(err);
     }
 };
 
