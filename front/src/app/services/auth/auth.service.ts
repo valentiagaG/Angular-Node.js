@@ -4,7 +4,7 @@ import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../interfaces/req-res';
 
-import { CookieOptions, CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
@@ -40,11 +40,13 @@ export class AuthService {
         (token) => {
           alert('User logged in');
           this.rta = true;
+          this.cookies.set("rta", "true");
           this.router.navigate(['/']);
           this.guardarToken(token);
         },
         (error)=>{ 
           this.rta = false;
+          this.cookies.set("rta", "false");
         }
       );
   }

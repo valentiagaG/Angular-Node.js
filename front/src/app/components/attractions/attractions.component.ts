@@ -1,18 +1,40 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AttractionsService } from '../../services/attractionService/attractions.service';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @Component({
   selector: 'app-attractions',
   standalone: true,
-  imports: [RouterModule, FormsModule, NgIf],
+  imports: [RouterModule, FormsModule, NgIf, MatFormFieldModule, MatTableModule],
   templateUrl: './attractions.component.html',
   styleUrl: './attractions.component.css'
 })
 
-export class AttractionsComponent {
+export class AttractionsComponent implements OnInit {
+
+  columnas: string[] = ['codigo', 'descripcion', 'precio'];
+  datos: Articulo[] = [new Articulo(1, 'papas', 55),
+  new Articulo(2, 'manzanas', 53),
+  new Articulo(3, 'naranjas', 25),
+  ];
+
+  // dataSource = new MatTableDataSource<any>
+  dataSource:any; 
+
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource(this.datos);
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }  
+
 
   showSuccessAlert = false;
   
@@ -44,4 +66,9 @@ export class AttractionsComponent {
     this.showSuccessAlert = true;
     this.modalVisible = false;
   }
+}
+
+export class Articulo {
+  constructor(public codigo: number, public descripcion: string, public precio: number) {
+}
 }

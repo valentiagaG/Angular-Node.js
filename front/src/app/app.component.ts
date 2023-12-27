@@ -11,6 +11,7 @@ import { AttractionsComponent } from './components/attractions/attractions.compo
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -18,6 +19,7 @@ import { AuthService } from './services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
 
   title = 'routing';
