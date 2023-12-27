@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { Attraction, AttractionsList } from '../../interfaces/req-res';
 
 
 @Component({
@@ -16,17 +17,29 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 
 export class AttractionsComponent implements OnInit {
+  public attService = inject (AttractionsService);
+  columnas: string[] = ['name','address', 'accesibility', 'aimedTo', 'danger'];
+  
+  datos: Attraction[] = [];  
+  
+  cargarDatos() {
+    if (this.attService.loading()) {
+      // Espera a que la carga esté completa
+      setTimeout(() => this.cargarDatos(), 200);
+      return;
+    }
+    this.datos = this.attService.attractions();
+    this.dataSource = new MatTableDataSource(this.datos);
+  }
+  
+  estaCargando(){
+    return this.attService.loading();
+  }
 
-  columnas: string[] = ['codigo', 'descripcion', 'precio'];
-  datos: Articulo[] = [new Articulo(1, 'papas', 55),
-  new Articulo(2, 'manzanas', 53),
-  new Articulo(3, 'naranjas', 25),
-  ];
-
-  // dataSource = new MatTableDataSource<any>
   dataSource:any; 
 
   ngOnInit() {
+    this.cargarDatos();
     this.dataSource = new MatTableDataSource(this.datos);
   }
 
@@ -45,15 +58,6 @@ export class AttractionsComponent implements OnInit {
   danger= 0;
 
   
-  // data = {
-  //   name: this.name,
-  //   address: this.add,
-  //   accesibility: this.acc,       
-  //   aimedTo: this.aimedTo,
-  //   danger: this.danger,                  
-  // };
-
-  public attService = inject (AttractionsService);
   modalVisible = false;
 
   toggleModal() {
@@ -68,7 +72,3 @@ export class AttractionsComponent implements OnInit {
   }
 }
 
-export class Articulo {
-  constructor(public codigo: number, public descripcion: string, public precio: number) {
-}
-}

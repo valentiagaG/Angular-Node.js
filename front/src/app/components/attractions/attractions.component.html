@@ -1,38 +1,53 @@
 <section class="bg-gray-100">
-  <!-- <mat-form-field>
-    <mat-label>Buscar</mat-label>
-    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
-  </mat-form-field> -->
-
-  <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="codigo">
-        <th mat-header-cell *matHeaderCellDef>Código</th>
-        <td mat-cell *matCellDef="let articulo">{{ articulo.codigo }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="descripcion">
-        <th mat-header-cell *matHeaderCellDef>Descripción</th>
-        <td mat-cell *matCellDef="let articulo">{{ articulo.descripcion }}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="precio">
-        <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let articulo">{{ articulo.precio }}</td>
-      </ng-container>
-      
-      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
-    </table>
-  </div>
-
   <h1
     class="pt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
   >
     Listado de atracciones
   </h1>
+  <mat-form-field>
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+  </mat-form-field>
 
-  <ul>
+
+ 
+  <div *ngIf="!estaCargando()"class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let att">{{ att.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="address">
+        <th mat-header-cell *matHeaderCellDef>Address</th>
+        <td mat-cell *matCellDef="let att">{{ att.address }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="accesibility">
+        <th mat-header-cell *matHeaderCellDef>Accesibility</th>
+        <td mat-cell *matCellDef="let att">{{ att.accesibility }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="aimedTo">
+        <th mat-header-cell *matHeaderCellDef>Aimed to</th>
+        <td mat-cell *matCellDef="let att">{{ att.aimedTo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="danger">
+        <th mat-header-cell *matHeaderCellDef>Danger</th>
+        <td mat-cell *matCellDef="let att">{{ att.danger }}</td>
+      </ng-container>
+
+      <!-- Define las columnas que deseas mostrar -->
+      <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+    </table>
+  </div>
+  <div *ngIf="estaCargando()">
+    <h3>Cargando atracciones</h3>
+  </div>
+
+  <!-- <ul>
     @for (attraction of attService.attractions(); track
     attraction.idAttraction){
     <li>
@@ -44,7 +59,7 @@
     } @empty {
     <h3>Cargando</h3>
     }
-  </ul>
+  </ul> -->
 
   <!-- Modal toggle -->
   <button
