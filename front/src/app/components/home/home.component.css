@@ -2,14 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-.img0{
+.img0 {
     height: 250px;
 }
 
-h2{
+h2 {
     font-family: 'Noto Sans', sans-serif;
 }
 
-p{
+p {
     font-family: 'Noto Sans', sans-serif;
+}
+
+.slick-prev:before, .slick-next:before{
+    color: black !important;
+}
+
+.carousel { 
+    margin: auto;  
+}
+
+.slide {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.miCard {
+    /* Estilos de tu tarjeta de hotel */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    
+    height: 400px;
+    width: 280px;
 }

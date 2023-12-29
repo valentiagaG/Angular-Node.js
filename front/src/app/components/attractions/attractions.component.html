@@ -2,13 +2,12 @@
   <h1
     class="pt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
   >
-    Listado de atracciones
+    Attractions list
   </h1>
   <mat-form-field>
     <mat-label>Buscar</mat-label>
-    <input matInput (keyup)="filtrar($event)" placeholder="buscar" />
+    <input matInput (keyup)="filtrar($event)" placeholder="buscar" [formControl]="myFormControl"/>
   </mat-form-field>
-
 
  
   <div *ngIf="!estaCargando()"class="mat-elevation-z8">

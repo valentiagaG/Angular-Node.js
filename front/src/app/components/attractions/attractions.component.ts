@@ -1,17 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AttractionsService } from '../../services/attractionService/attractions.service';
 import { NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Attraction, AttractionsList } from '../../interfaces/req-res';
-
+import { Attraction } from '../../interfaces/req-res';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-attractions',
   standalone: true,
-  imports: [RouterModule, FormsModule, NgIf, MatFormFieldModule, MatTableModule],
+  imports: [RouterModule, FormsModule, NgIf, MatFormFieldModule, MatInputModule , MatTableModule, ReactiveFormsModule],
   templateUrl: './attractions.component.html',
   styleUrl: './attractions.component.css'
 })
@@ -19,7 +19,9 @@ import { Attraction, AttractionsList } from '../../interfaces/req-res';
 export class AttractionsComponent implements OnInit {
   public attService = inject (AttractionsService);
   columnas: string[] = ['name','address', 'accesibility', 'aimedTo', 'danger'];
-  
+  // En el componente.ts
+  myFormControl = new FormControl();
+
   datos: Attraction[] = [];  
   
   cargarDatos() {
@@ -39,9 +41,12 @@ export class AttractionsComponent implements OnInit {
   dataSource:any; 
 
   ngOnInit() {
+    
     this.cargarDatos();
     this.dataSource = new MatTableDataSource(this.datos);
   }
+
+  
 
   filtrar(event: Event) {
     const filtro = (event.target as HTMLInputElement).value;

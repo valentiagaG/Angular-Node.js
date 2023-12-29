@@ -1,6 +1,6 @@
-<section class="h-screen bg-gray-200">
+<section class=" bg-gray-200">
     <div class="flex flex-col justify-center items-center px-6 py-8 ">
-      <div class="bg-white w-2/4 p-6 rounded-lg">
+      <div class="bg-white w-2/4 p-6 rounded-lg shadow-lg">
         <div class="">
           <img
             class="mx-auto h-12 w-auto"
@@ -14,46 +14,29 @@
           </h2>
         </div>
     
-        <div class="mt-10">
-          <form class="space-y-6" action="#" method="POST">
-            <!-- <div>
-              <label
-                for="email"
-                class="block text-sm font-medium leading-6 text-gray-900"
-                >Email address</label
-              >
-              <div class="mt-2">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  required
-                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                />
-              </div>
-            </div> -->
+        <div class="mt-10 p-6">
+          <form [formGroup]="loginForm" class="space-y-6" action="#" method="POST" autocomplete="off" (ngSubmit)="onSave()">
             <div>
               <label
                 for="userName"
                 class="block text-sm font-medium leading-6 text-gray-900"
-                >Email address</label
+                >Username</label
               >
               <div class="mt-2">
                 <input
+                  formControlName="userName"
                   id="userName"
                   name="userName"
                   type="text"
-                  [(ngModel)]="userName"
-                  required
                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   
                   />
+                  <span *ngIf="isValidField('userName')" class="text-red-500">
+                    {{getFieldError('userName')}}
+                  </span>
               </div>
             </div>
 
-
-    
             <div>
               <div class="flex items-center justify-between">
                 <label
@@ -69,23 +52,24 @@
                   >
                 </div>
               </div>
-              <div class="mt-2">
+              <div class="mt-2 flex-col">
                 <input
+                  formControlName="password"
                   id="password"
                   name="password"
                   type="password"
-                  [(ngModel)]="password"
-                  autocomplete="current-password"
-                  required
                   class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder=" *****"
                 />
+                <span *ngIf="isValidField('password')"  class="text-red-500">
+                  {{getFieldError('password')}}
+                </span>
               </div>
             </div>
     
             <div>
               <button
-                (click)="login()"
+                
                 type="submit"
                 class="flex w-full justify-center rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-600"
               >
@@ -102,6 +86,7 @@
               >Start creating an account</a
             >
           </p>
+         
         </div>
       </div>
     </div>

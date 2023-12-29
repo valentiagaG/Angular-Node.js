@@ -1,5 +1,4 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core'
-
 import { routes } from './app.routes';
 import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorInterceptor } from './interceptors/error.interceptor';
@@ -11,13 +10,14 @@ import { AttractionsService } from './services/attractionService/attractions.ser
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { CdkTableModule, DataSource } from '@angular/cdk/table';
+import { SlickCarouselComponent } from 'ngx-slick-carousel';
+import { Validators } from '@angular/forms';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), HttpClientModule, provideHttpClient(withInterceptors([
         errorInterceptor
-    ])), CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, CdkTableModule]
+    ])), CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators]
 
   
 };

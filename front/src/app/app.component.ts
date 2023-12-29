@@ -10,12 +10,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
-
+import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { SnackbarService } from './services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent],
+  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

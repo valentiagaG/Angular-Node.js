@@ -1,18 +1,21 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, delay, map, of } from 'rxjs';
 import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../interfaces/req-res';
-
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarService } from '../snackbar/snackbar.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   
   private readonly baseUrl:string = environments.baseUrl;
-  private http = inject( HttpClient)
+  private http = inject( HttpClient);
+  private snackBar = inject (SnackbarService);
   private rta:boolean = false;
   private cookies = inject(CookieService);
 
@@ -38,7 +41,7 @@ export class AuthService {
           map((response: any) => response.body))
       .subscribe(
         (token) => {
-          alert('User logged in');
+          this.snackBar.openSnackBar('User succesfully logged in', 'Hide');
           this.rta = true;
           this.cookies.set("rta", "true");
           this.router.navigate(['/']);
@@ -89,7 +92,7 @@ export class AuthService {
     .pipe(delay(1000))
       .subscribe(
         (response) => {
-          // alert('User signed in');
+          this.snackBar.openSnackBar('User succesfully signed in', 'Hide');
           //redireccionar al login
           this.router.navigate(['/login']);
         },
