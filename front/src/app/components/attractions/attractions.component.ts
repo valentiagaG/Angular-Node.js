@@ -5,8 +5,8 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { Attraction } from '../../interfaces/req-res';
 import { MatInputModule } from '@angular/material/input';
+import { Attraction } from '../../interfaces/req-res';
 
 @Component({
   selector: 'app-attractions',

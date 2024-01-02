@@ -2,6 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-h1, label{
+h1,
+label {
     font-family: 'Noto Sans', sans-serif;
 }
+
+:host {
+    display: flex;
+    flex-direction: column;
+}
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .mat-input-element {
+    color: red !important;
+  }
+
+  button[disabled] {
+    background-color: rgb(172, 172, 172);
+  }
+
+  /* .custom-form-field {
+
+    border-width: 1px;
+    border-color: grey;
+    margin-bottom: 0;
+  }
+  
+  .custom-input {
+    color: black; 
+  } */

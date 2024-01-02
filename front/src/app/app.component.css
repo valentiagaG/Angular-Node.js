@@ -2,7 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-snackbar {
-    background-color: red;
-    color: white;
-}

@@ -5,11 +5,15 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { NgIf } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SigninComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf],
+  imports: [SigninComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -28,52 +32,60 @@ export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup = this.fb.group({
     userName : ['', [Validators.required, Validators.minLength(3)]],
-    password : ['', [Validators.required, Validators.minLength(6)]],
+    password : ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,32}$')]],
   })
 
   constructor(private fb:FormBuilder){
 
   }
 
-  onSave():void{
-    if (this.loginForm.invalid){
-      this.loginForm.markAllAsTouched();
-      return;
-    } 
-    this.login();
-    this.loginForm.reset(); //reestablecer el formulario con valores iniciales. Otro uso muy comun es hacerlo en el ngOnInit
-  }
+  // onSave():void{
+  //   if (this.loginForm.invalid){
+  //     this.loginForm.markAllAsTouched();
+  //     return;
+  //   } 
+  //   this.login();
+  //   this.loginForm.reset(); //reestablecer el formulario con valores iniciales. Otro uso muy comun es hacerlo en el ngOnInit
+  // }
 
-  isValidField(field: string): boolean | null{
-    return this.loginForm.controls[field].errors && this.loginForm.controls[field].touched;
-  }
+  // isValidField(field: string): boolean | null{
+  //   return this.loginForm.controls[field].errors && this.loginForm.controls[field].touched;
+  // }
   
-  getFieldError( field: string ):string| null{
-    if ( !this.loginForm.controls[field] ) return null;
-    const errors = this.loginForm.controls[field].errors || {};
+  // getFieldError( field: string ):string| null{
+  //   if ( !this.loginForm.controls[field] ) return null;
+  //   const errors = this.loginForm.controls[field].errors || {};
 
-    for (const key of Object.keys(errors)) {
-      switch(key){
-        case 'required':
-          if(field === 'userName'){
-            return 'username is required';
-          }
-          else{
-            return 'password is required';
-          }
+  //   for (const key of Object.keys(errors)) {
+  //     switch(key){
+  //       case 'required':
+  //         if(field === 'userName'){
+  //           return 'username is required';
+  //         }
+  //         else{
+  //           return 'password is required';
+  //         }
 
-        case 'minlength':
-          if(field === 'userName'){
-            return 'username must contain at least 3 characters';
-          }
-          else{
-            return 'password must contain at least 6 characters, including...';
-          }
-      }
+  //       case 'minlength':
+  //         if(field === 'userName'){
+  //           return 'username must contain at least 3 characters';
+  //         }
+  //         else{
+  //           return 'password must contain at least 6 characters, including...';
+  //         }
+  //     }
       
-    }
-    return null;
+  //   }
+  //   return null;
+  // }
+
+  get userName(){
+    return this.loginForm.get('userName')?.value;
   }
+  get password(){
+    return this.loginForm.get('password')?.value;
+  }
+
 
   login(){
     this.authService.login(this.loginForm.get('userName')?.value, this.loginForm.get('password')?.value);

@@ -12,12 +12,14 @@ import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/
 import { MatSortModule } from '@angular/material/sort';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Validators } from '@angular/forms';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), HttpClientModule, provideHttpClient(withInterceptors([
+  providers: [provideRouter(routes), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, HttpClientModule, provideHttpClient(withInterceptors([
         errorInterceptor
-    ])), CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators]
+    ])), CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton]
 
   
 };
