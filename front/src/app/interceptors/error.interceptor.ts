@@ -1,11 +1,12 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { SnackbarService } from '../services/snackbar/snackbar.service';
+import { SnackbarComponent } from '../components/snackbar/snackbar.component';
+
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
 
-  let snackBar = inject (SnackbarService);
+  let snackBar = inject (SnackbarComponent);
 
   return next(req).pipe(catchError((error)=>{
     if ([401].includes(error.status)){

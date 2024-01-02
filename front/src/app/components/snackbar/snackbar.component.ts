@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class SnackbarService {
 
+@Component({
+  selector: 'app-snackbar',
+  standalone: true,
+  imports: [],
+  templateUrl: './snackbar.component.html',
+  styleUrl: './snackbar.component.css'
+})
+export class SnackbarComponent {
   constructor(private snackBar: MatSnackBar) {}
 
   openSnackBar(message: string, action: string) {

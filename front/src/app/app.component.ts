@@ -9,9 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth/auth.service';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { SnackbarService } from './services/snackbar/snackbar.service';
 
 @Component({
   selector: 'app-root',

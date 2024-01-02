@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../../interfaces/req-res';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { SnackbarService } from '../snackbar/snackbar.service';
+import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,11 @@ export class AuthService {
   
   private readonly baseUrl:string = environments.baseUrl;
   private http = inject( HttpClient);
-  private snackBar = inject (SnackbarService);
+  
   private rta:boolean = false;
   private cookies = inject(CookieService);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private snackBar: SnackbarComponent) {
     
   }
 

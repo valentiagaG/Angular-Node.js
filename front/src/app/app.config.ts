@@ -14,12 +14,13 @@ import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { Validators } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, HttpClientModule, provideHttpClient(withInterceptors([
         errorInterceptor
-    ])), CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton]
+    ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton]
 
   
 };
