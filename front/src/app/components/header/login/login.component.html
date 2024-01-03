@@ -16,7 +16,7 @@
 
       <div class="mt-10 p-6">
         <form [formGroup]="loginForm" class="space-y-6" autocomplete="off">
-          <mat-form-field class="example-full-width custom-form-field !important">
+          <mat-form-field class="w-full custom-form-field !important">
             <mat-label>Username</mat-label>
             <input matInput formControlName="userName" class="custom-input !important"/>
             <mat-error
@@ -49,7 +49,7 @@
             >
           </div>
 
-          <mat-form-field class="example-full-width">
+          <mat-form-field class="w-full">
             <mat-label>Password</mat-label>
             <input
               matInput
@@ -81,7 +81,7 @@
           <div class=" flex justify-center">
             <button
               [disabled]="!loginForm.valid"
-              class="w-30 rounded-md bg-gray-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-gray-500  focus-visible:outline-gray-600"
+              class="rounded-md px-3 py-1.5 text-sm leading-6 shadow-sm hover:bg-gray-500  focus-visible:outline-gray-600"
               mat-raised-button
               (click)="login()"
             >

@@ -22,6 +22,7 @@
     "@angular/router": "^17.0.8",
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^2.0.18",
+    "ag-grid-angular": "^31.0.1",
     "hammerjs": "^2.0.8",
     "jquery": "^3.7.1",
     "ngx-cookie-service": "^17.0.1",

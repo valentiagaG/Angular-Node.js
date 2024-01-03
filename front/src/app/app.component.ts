@@ -10,11 +10,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule],
+  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule, SpinnerComponent, SnackbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -22,13 +24,5 @@ import { ReactiveFormsModule, Validators } from '@angular/forms';
 export class AppComponent {
 
   title = 'routing';
-  // private authService = inject (AuthService);
 
-  // estaLogueado(){
-  //   return this.authService.estaLogueado();
-  // }
-
-  // logOut(){
-  //   this.authService.logOut();
-  // }
 }

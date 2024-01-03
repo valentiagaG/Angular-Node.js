@@ -26,7 +26,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "@angular/material/prebuilt-themes/pink-bluegrey.css",
+              "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css"
             ],

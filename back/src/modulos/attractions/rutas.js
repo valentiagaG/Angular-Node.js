@@ -12,7 +12,8 @@ router.delete('/', eliminar);
 
 async function todos(req, res){
     try{
-        const items = await controlador.todos()
+        const items = await controlador.todos();
+        
         respuesta.success(req, res, items, 200);
     }
     catch(err){

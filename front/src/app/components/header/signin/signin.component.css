@@ -6,7 +6,3 @@ h1,
 label {
     font-family: 'Noto Sans', sans-serif;
 }
-
-button[disabled] {
-    background-color: rgb(172, 172, 172);
-}

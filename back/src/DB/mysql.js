@@ -33,13 +33,29 @@ function conMysql(){
 conMysql();
 
 
-function todos(tabla){
+function todos(tablaR){
     return new Promise((resolve, reject)=>{
-        conexion.query(`SELECT * FROM ${tabla}`, (error, result)=>{
+        conexion.query(`SELECT * FROM ${tablaR}`, (error, result)=>{
             return error? reject(error): resolve(result);
         })
     });
 }
+function allAttractions(tablaR) {
+    return new Promise((resolve, reject) => {
+      const query = `SELECT ${tablaR}.*, danger.description AS danger
+                     FROM ${tablaR}
+                     JOIN danger ON ${tablaR}.danger = danger.id`;
+  
+      conexion.query(query, (error, result) => {
+        if (error) {
+          reject(error);
+        } else {
+            // console.log(result);
+          resolve(result);
+        }
+      });
+    });
+  }
 
 function uno(tabla, id){
     return new Promise((resolve, reject)=>{
@@ -82,11 +98,21 @@ function query(tabla, consulta){
     });
 }
 
+// function getDanger(tablaR, tablaS, consulta) {
+//     return new Promise((resolve, reject) => {
+//         const query = `SELECT * FROM ${tablaR} JOIN ${tablaS} ON ${tablaR}.id = ${tablaS}.danger WHERE ?`;
+//         conexion.query(query, consulta, (error, result) => {
+//             return error ? reject(error) : resolve(result[0]);
+//         });
+//     });
+// }
+
 module.exports = {
     todos,
     uno,
     agregar,
     eliminar,
     query,
-    actualizar
+    actualizar,
+    allAttractions
 }

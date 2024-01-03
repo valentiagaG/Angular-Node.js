@@ -20,6 +20,7 @@ const chequearToken = {
         }
     }
 }
+
 function obtenerToken(autorizacion){
     if (!autorizacion){
         throw new Error('No viene token');

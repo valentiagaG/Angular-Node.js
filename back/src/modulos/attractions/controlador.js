@@ -12,7 +12,7 @@ module.exports = function(dbInyectada){
     }
 
     function todos(){
-        return db.todos(TABLA);
+        return db.allAttractions(TABLA);
      }
      
      function uno(id){

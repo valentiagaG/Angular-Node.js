@@ -11,7 +11,7 @@ export interface Attraction {
     address:      string;
     accesibility: number;
     aimedTo:      string;
-    danger:       number;
+    danger:       string;
     idAttraction: number;
 }
 

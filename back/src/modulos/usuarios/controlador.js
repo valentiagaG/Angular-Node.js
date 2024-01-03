@@ -1,5 +1,5 @@
 //desde aca se hacen todas las consultas a la base de datos
-const TABLA = 'usuarios';
+const TABLA = 'users';
 const auth = require('../auth')
 
 module.exports = function(dbInyectada){

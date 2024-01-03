@@ -18,7 +18,7 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'fill'}}, HttpClientModule, provideHttpClient(withInterceptors([
+  providers: [provideRouter(routes), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}, HttpClientModule, provideHttpClient(withInterceptors([
         errorInterceptor
     ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton]
 
