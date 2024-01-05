@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AttractionsService } from '../../services/attractionService/attractions.service';
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -48,8 +48,9 @@ export class AttractionsComponent {
     aimedTo:[null],
     danger: [null]
   })
+  
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, private router: Router){
 
   }
 
@@ -125,13 +126,16 @@ export class AttractionsComponent {
     return this.attService.loading();
   }
 
-
   showSuccessAlert = false;
 
   modalVisible = false;
 
   toggleModal() {
     this.modalVisible = !this.modalVisible;
+  }
+
+  redirectToChart(){
+    this.router.navigate(['/chart']);
   }
 
   get name(){
@@ -150,21 +154,16 @@ export class AttractionsComponent {
     return this.addAttractionForm.get('aimedTo')?.value;
   }
 
-  postAttraction() {
-
-   
-
-  console.log(this.name, this.add, this.acc, this.danger, this.aimedTo);
-  
+  postAttraction() {  
     this.attService.postAttraction(this.name, this.add, this.acc, this.danger, this.aimedTo);
     this.showSuccessAlert = true;
     this.modalVisible = false;
 
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
+    
   }
-
 
 }
 

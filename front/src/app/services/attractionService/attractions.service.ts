@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { Attraction, AttractionsList } from '../../interfaces/req-res';
-import { delay, map } from 'rxjs';
+import { BehaviorSubject, Observable, delay, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface State {
@@ -22,17 +22,23 @@ export class AttractionsService {
   //creo una señal computada --> solo de lectura
   public attractions = computed(() => this.#state().attractions);
   public loading = computed(() => this.#state().loading);
+  
 
-
+  private attractionsSubject = new BehaviorSubject<Attraction[]>([]);
+  attractions$: Observable<Attraction[]> = this.attractionsSubject.asObservable();
   constructor() {
+    this.loadData();
+  }
+
+  private loadData(): void {
     this.http.get<AttractionsList>('http://localhost:4000/api/attractions')
       .pipe(delay(1000))
-      .subscribe((res: { body: any; }) => {
+      .subscribe((res: { body: Attraction[] }) => {
         this.#state.set({
           loading: false,
           attractions: res.body,
-        })
-        
+        });
+        this.attractionsSubject.next(res.body);
       });
   }
 
@@ -52,7 +58,15 @@ export class AttractionsService {
 
   // Método para realizar una solicitud POST
   postAttraction(name: string, add: string, acc: string, danger: string, aimedTo: string) {
-    
+    const newAttraction: Attraction = {
+      name: name,
+      address: add,
+      accesibility: parseInt(acc, 10),
+      aimedTo: aimedTo,
+      danger: danger,
+      idAttraction: 0
+    };
+
     this.data = {
       name: name,
       address: add,
@@ -60,8 +74,11 @@ export class AttractionsService {
       aimedTo: aimedTo,
       danger: parseInt(danger, 10),
     }
-    console.log(this.data);
-    console.log(typeof(this.data.danger));
+
+    this.#state.update((currentState) => ({
+      ...currentState,
+      attractions: [...currentState.attractions, newAttraction],
+    }));
     
     this.http.post<AttractionsList>('http://localhost:4000/api/attractions', this.data)
       .pipe(delay(1000))

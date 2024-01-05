@@ -1,5 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .miChart{
-    height: 800px !important;
+    height: 500px !important;
     width: auto;
 
 }

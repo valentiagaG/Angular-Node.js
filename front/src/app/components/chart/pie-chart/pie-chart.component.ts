@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Signal, inject } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
+import { AttractionsService } from '../../../services/attractionService/attractions.service';
+import { Attraction } from '../../../interfaces/req-res';
 
 @Component({
   selector: 'app-pie-chart',
@@ -11,9 +13,33 @@ import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
   templateUrl: './pie-chart.component.html',
   styleUrl: './pie-chart.component.css'
 })
-export class PieChartComponent {
+export class PieChartComponent implements OnInit {
+  public attService = inject(AttractionsService);
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
+  ngOnInit(): void {
+    // Subscribe to changes in the attractions observable
+    this.attService.attractions$.subscribe(attractions => {
+      // Count the number of attractions for each danger level
+      const dangerCounts = this.getCountsByDanger(attractions);
+
+      // Update chart data
+      this.pieChartData.labels = Object.keys(dangerCounts);
+      this.pieChartData.datasets[0].data = Object.values(dangerCounts);
+
+      // Trigger chart update
+      this.chart?.update();
+    });
+  }
+
+  private getCountsByDanger(attractions: any[]): { [key: string]: number } {
+    return attractions.reduce((counts, attraction) => {
+      const dangerLevel = attraction.danger;
+      counts[dangerLevel] = (counts[dangerLevel] || 0) + 1;
+      return counts;
+    }, {} as { [key: string]: number });
+  }
+  
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {
     plugins: {
