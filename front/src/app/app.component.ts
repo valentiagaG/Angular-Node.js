@@ -12,11 +12,12 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule, SpinnerComponent, SnackbarComponent],
+  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule, SpinnerComponent, SnackbarComponent, ChartComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

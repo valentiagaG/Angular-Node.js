@@ -8,6 +8,7 @@ import { AttractionsComponent } from './components/attractions/attractions.compo
 import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuard } from './guards/auth.guard';
 import { LoginMessageComponent } from './components/login-message/login-message.component';
+import { ChartComponent } from './components/chart/chart.component';
 
 export const routes: Routes = [
     {
@@ -34,6 +35,17 @@ export const routes: Routes = [
         path: 'attractions',
         // canActivate: [authGuard],
         component: LoginMessageComponent,
+    },
+    {
+        path: 'chart',
+        canMatch: [authGuard],
+        // canActivate: [authGuard],
+        component: ChartComponent,
+    },
+    {
+        path: 'chart',
+        // canActivate: [authGuard],
+        component: ChartComponent,
     },
     {
         path: 'about',
