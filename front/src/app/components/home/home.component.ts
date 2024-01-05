@@ -4,14 +4,15 @@ import {NgFor, NgIf} from '@angular/common';
 import { HotelsService } from '../../services/hotels/hotels.service';
 import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SpinnerComponent } from "../spinner/spinner.component";
 
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [HeaderComponent, FormsModule, NgIf, NgFor, SlickCarouselModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    standalone: true,
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css',
+    imports: [HeaderComponent, FormsModule, NgIf, NgFor, SlickCarouselModule, SpinnerComponent]
 })
 
 export class HomeComponent {
@@ -40,4 +41,9 @@ export class HomeComponent {
       },
     ]
   };
+
+  estaCargando() {
+    return this.hotelService.loading();
+  }
+
 }

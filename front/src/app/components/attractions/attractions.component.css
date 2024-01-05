@@ -24,6 +24,9 @@ h1{
   color: rgb(155, 101, 1); /* darker orange */
 }
 
-.miAgGrid{
-  width: 50%;
+.miInput{
+  min-width: 150px;
+  max-width: 500px;
+  max-height: 30px;
+  width: 100%;
 }

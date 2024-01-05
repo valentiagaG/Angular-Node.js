@@ -28,49 +28,56 @@
         Explore the whole collection of open-source web components and elements
         built with the utility classes from Tailwind
       </p>
-    </div>
-        <ngx-slick-carousel
-          class="carousel"
-          #slickModal="slick-carousel"
-          [config]="slideConfig"
-        >
-          <div ngxSlickItem *ngFor="let hotel of hotelService.hotels()" class="slide">
-            <div
-              class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 miCard"
-            >
-              <div class="p-5">
-                <h3
-                  class="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+      
+    </div >
+    <div  *ngIf="!estaCargando()">
+      <ngx-slick-carousel
+        class="carousel"
+        #slickModal="slick-carousel"
+        [config]="slideConfig"
+      >
+        <div ngxSlickItem *ngFor="let hotel of hotelService.hotels()" class="slide">
+          <div
+            class="items-center bg-gray-50 rounded-lg shadow sm:flex dark:bg-gray-800 dark:border-gray-700 miCard"
+          >
+            <div class="p-5">
+              <h3
+                class="text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+              >
+                <a href="#">{{ hotel.name }}</a>
+              </h3>
+              <a href="#">
+                <img
+                  class="object-cover rounded-lg sm:rounded-none sm:rounded-l-lg"
+                  src="{{ hotel.img }}"
+                  alt="Bonnie Avatar"
+                />
+              </a>
+              <span class="text-gray-500 dark:text-gray-400">
+                {{ hotel.description }}</span
+              >
+              <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
+                {{ hotel.address }}
+              </p>
+              <ul class="flex space-x-4 sm:mt-0">
+                <li
+                  *ngFor="let star of [].constructor(hotel.punt); let i = index"
                 >
-                  <a href="#">{{ hotel.name }}</a>
-                </h3>
-                <a href="#">
                   <img
-                    class="object-cover rounded-lg sm:rounded-none sm:rounded-l-lg"
-                    src="{{ hotel.img }}"
-                    alt="Bonnie Avatar"
+                    src="../../assets/img/estrellaSVG.svg"
+                    alt="Estrella {{ i + 1 }}"
                   />
-                </a>
-                <span class="text-gray-500 dark:text-gray-400">
-                  {{ hotel.description }}</span
-                >
-                <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
-                  {{ hotel.address }}
-                </p>
-                <ul class="flex space-x-4 sm:mt-0">
-                  <li
-                    *ngFor="let star of [].constructor(hotel.punt); let i = index"
-                  >
-                    <img
-                      src="../../assets/img/estrellaSVG.svg"
-                      alt="Estrella {{ i + 1 }}"
-                    />
-                  </li>
-                </ul>
-              </div>
+                </li>
+              </ul>
             </div>
           </div>
-        </ngx-slick-carousel>
-   
+        </div>
+      </ngx-slick-carousel>
+    </div>
+    <div *ngIf="estaCargando()">
+      <section class=" flex justify-center items-center" style="height: 400px;">
+        <app-spinner></app-spinner>
+      </section>
+    </div>
   </div>
 </section>

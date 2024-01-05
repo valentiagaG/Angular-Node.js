@@ -32,6 +32,7 @@ export class AttractionsService {
           loading: false,
           attractions: res.body,
         })
+        
       });
   }
 
@@ -50,14 +51,18 @@ export class AttractionsService {
   };
 
   // Método para realizar una solicitud POST
-  postAttraction(name: string, add: string, acc: number, danger: number, aimedTo: string) {
+  postAttraction(name: string, add: string, acc: string, danger: string, aimedTo: string) {
+    
     this.data = {
       name: name,
       address: add,
-      accesibility: acc,
+      accesibility:  parseInt(acc, 10),
       aimedTo: aimedTo,
-      danger: danger,
+      danger: parseInt(danger, 10),
     }
+    console.log(this.data);
+    console.log(typeof(this.data.danger));
+    
     this.http.post<AttractionsList>('http://localhost:4000/api/attractions', this.data)
       .pipe(delay(1000))
       .subscribe(

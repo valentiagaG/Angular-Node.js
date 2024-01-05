@@ -15,12 +15,13 @@ import { Validators } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}, HttpClientModule, provideHttpClient(withInterceptors([
         errorInterceptor
-    ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton]
+    ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton, AgGridModule]
 
   
 };

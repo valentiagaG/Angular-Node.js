@@ -2,25 +2,46 @@
   <h1
     class="pt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
   >
-    Attractions 
+    Attractions
   </h1>
 
-  <div *ngIf="!estaCargando()" class=" justify-center w-full mt-4">
+  <div
+    *ngIf="!estaCargando()"
+    class="w-full my-4 flex flex-col items-center"
+  >
+    <mat-form-field >
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="quickSearch()"
+        [(ngModel)]="searchValue"
+        class=""
+      />
+    </mat-form-field>
+
     <ag-grid-angular
-          class="ag-theme-quartz m-auto"
-          style="max-width: 80%; height: 700px;"
-          [rowData]="rowData"
-          [columnDefs]="colDefs"
-          [defaultColDef]="defaultColDef"
-          [sideBar]="false"
-          (gridReady)="onGridReady($event)"
-        >
-      </ag-grid-angular>
+      class="ag-theme-quartz"
+      style="height: 500px; min-width: 77%;"
+      [rowData]="rowData"
+      [columnDefs]="colDefs"
+      [defaultColDef]="defaultColDef"
+      [animateRows]="true"
+      [pagination]="true"
+      [paginationPageSize]="paginationPageSize"
+      [paginationPageSizeSelector]="paginationPageSizeSelector"
+      [sideBar]="false"
+      fullWidthCellRenderer=""
+      [suppressHorizontalScroll]="true"
+      (gridReady)="onGridReady($event)"
+    ></ag-grid-angular>
+    
+  
   </div>
 
+  
   <div *ngIf="estaCargando()">
     <section class="h-screen flex justify-center items-center">
-        <app-spinner></app-spinner>
+      <app-spinner></app-spinner>
     </section>
   </div>
 
@@ -88,126 +109,81 @@
             </button>
           </div>
           <!-- Modal body -->
-          <form class="p-4 md:p-5">
-            <div class="grid gap-4 mb-4 grid-cols-2">
-              <div class="col-span-2">
-                <label
-                  for="inputName"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Name</label
-                >
-                <input
-                  type="text"
-                  name="inputName"
-                  id="inputName"
-                  [(ngModel)]="name"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type attraction name"
-                  required=""
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </div>
-              <div class="col-span-2">
-                <label
-                  for="inputAdd"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Address</label
-                >
-                <input
-                  type="text"
-                  name="inputAdd"
-                  id="inputAdd"
-                  [(ngModel)]="add"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Type address"
-                  required=""
-                  [ngModelOptions]="{ standalone: true }"
-                />
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="acc"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Accesibility</label
-                >
-                <select
-                  [(ngModel)]="acc"
-                  id="acc"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option selected="">Select</option>
-                  <option value="1">1</option>
-                  <option value="0">0</option>
-                </select>
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="danger"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Danger</label
-                >
-                <select
-                  id="danger"
-                  [(ngModel)]="danger"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  [ngModelOptions]="{ standalone: true }"
-                >
-                  <option selected="">Select</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
-              <div class="col-span-2 sm:col-span-1">
-                <label
-                  for="category"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Aimed to</label
-                >
-                <select
-                  id="aimedTo"
-                  [(ngModel)]="aimedTo"
-                  [ngModelOptions]="{ standalone: true }"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  <option selected="">Select</option>
-                  <option value="General Audience">General Audience</option>
-                  <option value="Children">Children (Ages 0-12)</option>
-                  <option value="Teenagers">Teenagers (Ages 13-17)</option>
-                  <option value="Young Adults">Young Adults (18-24)</option>
-                  <option value="Adults">Adults (Ages 25+)</option>
-                  <option value="Families">Families</option>
-                  <option value="Outdoor Enthusiasts">
-                    Outdoor Enthusiasts
-                  </option>
-                  <option value="Health and Fitness Enthusiasts">
-                    Health and Fitness Enthusiasts
-                  </option>
-                </select>
-              </div>
-            </div>
-            <button
-              (click)="postAttraction()"
-              type="submit"
-              class="inline-flex items-center text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-            >
-              <svg
-                class="me-1 -ms-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
+          <form [formGroup]="addAttractionForm" class="space-y-6 p-4 md:p-5" autocomplete="off">
+            <mat-form-field class="w-full">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name">
+              <mat-error
+              *ngIf="
+                  addAttractionForm.get('name')?.hasError('required') &&
+                  (addAttractionForm.get('name')?.dirty ||
+                  addAttractionForm.get('name')?.touched)
+                  "
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clip-rule="evenodd"
-                ></path>
-              </svg>
-              Add attraction
-            </button>
+              Name is required
+            </mat-error>
+          </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>Address</mat-label>
+              <input matInput formControlName="address" />
+              <mat-error
+                *ngIf="
+                  addAttractionForm.get('address')?.hasError('required') &&
+                  (addAttractionForm.get('address')?.dirty ||
+                  addAttractionForm.get('address')?.touched)
+                "
+              >
+                Address is required
+              </mat-error>
+            </mat-form-field>
+  
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              
+    
+              <mat-form-field>
+                <mat-label>Accesibility</mat-label>
+                <mat-select formControlName="acc">
+                  <mat-option value="1">Accesible</mat-option>
+                  <mat-option value="0">Not accesible</mat-option>
+                </mat-select>
+              </mat-form-field>
+  
+              <mat-form-field>
+                <mat-label>Danger</mat-label>
+                <mat-select formControlName="danger">
+                  <mat-option value="1">Minimal</mat-option>
+                  <mat-option value="2">Low</mat-option>
+                  <mat-option value="3">Moderate</mat-option>
+                  <mat-option value="4">High</mat-option>
+                  <mat-option value="5">Maximun</mat-option>
+                </mat-select>
+              </mat-form-field>
+  
+            </div>
+            <mat-form-field class="w-full mt-0">
+              <mat-label>Aimed to</mat-label>
+              <mat-select formControlName="aimedTo">
+                <mat-option selected="">Select</mat-option>
+                <mat-option value="Families">Families</mat-option>
+                <mat-option value="General Audience">General Audience</mat-option>
+                <mat-option value="Children">Children (Ages 0-12)</mat-option>
+                <mat-option value="Teenagers">Teenagers (Ages 13-17)</mat-option>
+                <mat-option value="Young Adults">Young Adults (18-24)</mat-option>
+                <mat-option value="Adults">Adults (Ages 25+)</mat-option>
+                <mat-option value="Outdoor Enthusiasts">Outdoor Enthusiasts</mat-option>
+                <mat-option value="Health and Fitness Enthusiasts">Health and Fitness Enthusiasts</mat-option>
+              </mat-select>
+            </mat-form-field>
+             
+            
+            <div class="flex justify-center">
+              <button  mat-raised-button 
+              [disabled]="!addAttractionForm.valid"
+              (click)="postAttraction()"
+              class="rounded-md px-3 py-1.5 text-sm leading-6 shadow-sm hover:bg-gray-500  focus-visible:outline-gray-600"
+              >+ Add</button>
+             
+            </div>
           </form>
         </div>
       </div>

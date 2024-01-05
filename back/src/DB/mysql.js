@@ -44,7 +44,7 @@ function allAttractions(tablaR) {
     return new Promise((resolve, reject) => {
       const query = `SELECT ${tablaR}.*, danger.description AS danger
                      FROM ${tablaR}
-                     JOIN danger ON ${tablaR}.danger = danger.id`;
+                     LEFT JOIN danger ON ${tablaR}.danger = danger.id`;
   
       conexion.query(query, (error, result) => {
         if (error) {
