@@ -1,6 +1,6 @@
-import { Injectable, inject, signal, computed } from '@angular/core';
+import { Injectable, inject, signal, computed, EventEmitter } from '@angular/core';
 import { Attraction, AttractionsList } from '../../interfaces/req-res';
-import { BehaviorSubject, Observable, delay, map } from 'rxjs';
+import { delay } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface State {
@@ -13,7 +13,8 @@ interface State {
 })
 export class AttractionsService {
   private http = inject(HttpClient);
-
+  public attractionsChanged = new EventEmitter<void>();
+  
   #state = signal<State>({
     loading: true,
     attractions: [],
@@ -24,8 +25,8 @@ export class AttractionsService {
   public loading = computed(() => this.#state().loading);
   
 
-  private attractionsSubject = new BehaviorSubject<Attraction[]>([]);
-  attractions$: Observable<Attraction[]> = this.attractionsSubject.asObservable();
+  // private attractionsSubject = new BehaviorSubject<Attraction[]>([]);
+  // attractions$: Observable<Attraction[]> = this.attractionsSubject.asObservable();
   constructor() {
     this.loadData();
   }
@@ -38,7 +39,7 @@ export class AttractionsService {
           loading: false,
           attractions: res.body,
         });
-        this.attractionsSubject.next(res.body);
+        // this.attractionsSubject.next(res.body);
       });
   }
 
@@ -57,7 +58,7 @@ export class AttractionsService {
   };
 
   // Método para realizar una solicitud POST
-  postAttraction(name: string, add: string, acc: string, danger: string, aimedTo: string) {
+  public async postAttraction(name: string, add: string, acc: string, danger: string, aimedTo: string) {
     const newAttraction: Attraction = {
       name: name,
       address: add,
@@ -87,5 +88,7 @@ export class AttractionsService {
           console.log('Atraccion agregada');
         }
       );
+    
+      this.attractionsChanged.emit();
   }
 }

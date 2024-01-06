@@ -19,9 +19,8 @@ export class PieChartComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to changes in the attractions observable
-    this.attService.attractions$.subscribe(attractions => {
-      // Count the number of attractions for each danger level
-      const dangerCounts = this.getCountsByDanger(attractions);
+    const data = this.attService.attractions();
+    const dangerCounts = this.getCountsByDanger(data);
 
       // Update chart data
       this.pieChartData.labels = Object.keys(dangerCounts);
@@ -29,7 +28,17 @@ export class PieChartComponent implements OnInit {
 
       // Trigger chart update
       this.chart?.update();
-    });
+    // this.attService.attractions$.subscribe(attractions => {
+    //   // Count the number of attractions for each danger level
+    //   const dangerCounts = this.getCountsByDanger(attractions);
+
+    //   // Update chart data
+    //   this.pieChartData.labels = Object.keys(dangerCounts);
+    //   this.pieChartData.datasets[0].data = Object.values(dangerCounts);
+
+    //   // Trigger chart update
+    //   this.chart?.update();
+    // });
   }
 
   private getCountsByDanger(attractions: any[]): { [key: string]: number } {

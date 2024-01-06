@@ -79,25 +79,6 @@ export class AttractionsComponent {
     { field: "danger", width: 100, minWidth: 80 },
   ];
 
-  // colDefs: ColDef[] = [
-  //   { field: "name", width: 200, minWidth: 150 },
-  //   { field: "address", width: 300, minWidth: 200 },
-  //   {
-  //     field: "accesibility",
-  //     width: 150,
-  //     minWidth: 100,
-  //     cellRendererSelector: (params: ICellRendererParams) => {
-  //       if (params.value === 1) {
-  //         return { component: AccesibleComponent };
-  //       } else {
-  //         return  { component: NotAccesibleComponent };
-  //       }
-  //     },
-  //   },
-  //   { field: "aimedTo", width: 200, minWidth: 150 },
-  //   { field: "danger", width: 100, minWidth: 80 },
-  // ];
-
   public defaultColDef: ColDef = {
     editable: true,
     filter: true,
@@ -106,13 +87,27 @@ export class AttractionsComponent {
   myFormControl = new FormControl();
 
   onGridReady(params: GridReadyEvent) {
-    if (this.attService.loading()) {
-      setTimeout(() => this.onGridReady(params), 200);
-      return;
-    }
     this.gridApi = params.api;
-    this.rowData = this.attService.attractions();
+
+    // Suscribirse al evento attractionsChanged
+    this.attService.attractionsChanged.subscribe(() => {
+      this.onAttractionsChanged();
+    });
+  
+    // Verificar si hay atracciones cargadas inicialmente
+    if (!this.attService.loading()) {
+      this.rowData = this.attService.attractions();
+    }
    
+  }
+  ngOnInit(): void {
+    this.attService.attractionsChanged.subscribe(() => {
+      this.onAttractionsChanged();
+    });
+  }
+
+  onAttractionsChanged(): void {
+    this.rowData = this.attService.attractions();
   }
 
   quickSearch() {
@@ -154,11 +149,11 @@ export class AttractionsComponent {
     return this.addAttractionForm.get('aimedTo')?.value;
   }
 
-  postAttraction() {  
-    this.attService.postAttraction(this.name, this.add, this.acc, this.danger, this.aimedTo);
+  async postAttraction() {  
+    await this.attService.postAttraction(this.name, this.add, this.acc, this.danger, this.aimedTo);
     this.showSuccessAlert = true;
     this.modalVisible = false;
-
+  
     // setTimeout(() => {
     //   window.location.reload();
     // }, 1000);
