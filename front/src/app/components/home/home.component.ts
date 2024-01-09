@@ -4,7 +4,7 @@ import {NgFor, NgIf} from '@angular/common';
 import { HotelsService } from '../../services/hotels/hotels.service';
 import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
-import { SpinnerComponent } from "../spinner/spinner.component";
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { SpinnerComponent } from "../spinner/spinner.component";
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, FormsModule, NgIf, NgFor, SlickCarouselModule, SpinnerComponent]
+    imports: [HeaderComponent, FormsModule, NgIf, NgFor, SlickCarouselModule, NgxUiLoaderModule]
 })
 
 export class HomeComponent {

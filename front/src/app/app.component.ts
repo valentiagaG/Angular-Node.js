@@ -10,14 +10,16 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
+import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule, SpinnerComponent, SnackbarComponent, ChartComponent],
+  imports: [CommonModule, RouterOutlet,HeaderComponent, ContactComponent, AboutComponent, HomeComponent, RouterModule, FooterComponent, AttractionsComponent, ReactiveFormsModule, SnackbarComponent, ChartComponent, NgxUiLoaderModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,5 +27,20 @@ import { ChartComponent } from './components/chart/chart.component';
 export class AppComponent {
 
   title = 'routing';
+  constructor(
+    private http: HttpClient, private _ngxUiLoaderService: NgxUiLoaderService
+  ) { }
+  
+  triggerApiCall = () => {
+    const requests = [];
+    for (let i = 1, i_len = 2; i < i_len; i++) {
+      // this._ngxUiLoaderService.start();
+      requests.push(this.http.get(`https://jsonplaceholder.typicode.com/posts/${i}`));
+    }
+  
+    forkJoin(requests).subscribe(posts => {
+      posts.forEach(post => console.log(post));
+    });
+  };
 
 }

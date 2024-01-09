@@ -5,6 +5,7 @@ import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { BaseChartDirective, NgChartsModule } from 'ng2-charts';
 import { AttractionsService } from '../../../services/attractionService/attractions.service';
 import { Attraction } from '../../../interfaces/req-res';
+import { asyncScheduler, from, observeOn, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-pie-chart',
@@ -17,30 +18,60 @@ export class PieChartComponent implements OnInit {
   public attService = inject(AttractionsService);
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
+  
   ngOnInit(): void {
-    // Subscribe to changes in the attractions observable
+  const updateChart = () => {
     const data = this.attService.attractions();
-    const dangerCounts = this.getCountsByDanger(data);
+    const dangerCounts = this.accumulateCountsByDanger(data);
 
-      // Update chart data
-      this.pieChartData.labels = Object.keys(dangerCounts);
-      this.pieChartData.datasets[0].data = Object.values(dangerCounts);
+    // Actualiza chart data
+    this.pieChartData.labels = Object.keys(dangerCounts);
+    this.pieChartData.datasets[0].data = Object.values(dangerCounts);
 
-      // Trigger chart update
-      this.chart?.update();
-    // this.attService.attractions$.subscribe(attractions => {
-    //   // Count the number of attractions for each danger level
-    //   const dangerCounts = this.getCountsByDanger(attractions);
+    // Trigger chart update
+    this.chart?.update();
+  };
 
-    //   // Update chart data
-    //   this.pieChartData.labels = Object.keys(dangerCounts);
-    //   this.pieChartData.datasets[0].data = Object.values(dangerCounts);
+  // Cargar datos iniciales
+  updateChart();
 
-    //   // Trigger chart update
-    //   this.chart?.update();
-    // });
+  // Suscripción a cambios en las atracciones
+  this.attService.attractionsChanged.subscribe(() => {
+    updateChart();
+  });
+}
+
+private accumulateCountsByDanger(attractions: any[]): { [key: string]: number } {
+  return attractions.reduce((counts, attraction) => {
+    const dangerLevel = attraction.danger;
+    const dangerValue = this.mapDangerToNumber(dangerLevel);
+
+    // Acumular utilizando el dangerValue como clave
+    counts[dangerValue.toString()] = (counts[dangerValue.toString()] || 0) + 1;
+    return counts;
+  }, {} as { [key: string]: number });
+}
+
+// Función auxiliar para mapear niveles de peligro a valores numéricos
+private mapDangerToNumber(dangerLevel: string): string {
+  switch (dangerLevel.toLowerCase()) {
+    case '1':
+      return 'Minimal';
+    case '2':
+      return 'Low';
+    case '3':
+      return 'Moderate';
+    case '4':
+      return 'High';
+    case '5':
+      return 'Maximun';
+    default:
+      return dangerLevel; // Devuelve el nivel original si no coincide con ninguno
   }
+}
 
+  
+  
   private getCountsByDanger(attractions: any[]): { [key: string]: number } {
     return attractions.reduce((counts, attraction) => {
       const dangerLevel = attraction.danger;
@@ -48,6 +79,7 @@ export class PieChartComponent implements OnInit {
       return counts;
     }, {} as { [key: string]: number });
   }
+  
   
   // Pie
   public pieChartOptions: ChartConfiguration['options'] = {

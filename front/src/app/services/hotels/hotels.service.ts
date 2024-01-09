@@ -15,7 +15,7 @@ interface State {
 })
 export class HotelsService {
 
-  private http = inject(HttpClient);
+  // private http = inject(HttpClient);
 
   #state = signal<State>({
     loading: true,
@@ -27,7 +27,7 @@ export class HotelsService {
   public loading = computed(() => this.#state().loading);
 
   
-  constructor() { 
+  constructor(private http: HttpClient ) { 
     this.http.get<HotelsList>('http://localhost:4000/api/hotels')
       .pipe(delay(1000))
       .subscribe((res: { body: any; }) => {

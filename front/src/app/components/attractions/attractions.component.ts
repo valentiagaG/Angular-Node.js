@@ -12,20 +12,21 @@ import { ColDef, GridApi, ICellRendererParams } from 'ag-grid-community'; // Col
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { GridReadyEvent } from 'ag-grid-community';
-import { SpinnerComponent } from '../spinner/spinner.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { CellComponent } from '../cell/cell.component';
 import { AccesibleComponent } from '../cell/Accesible/accesible/accesible.component';
 import { NotAccesibleComponent } from '../cell/NotAccesible/not-accesible/not-accesible.component';
+import { spinnerInterceptor } from '../../interceptors/spinner/spinner.interceptor';
+import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
     selector: 'app-attractions',
     standalone: true,
     templateUrl: './attractions.component.html',
     styleUrl: './attractions.component.css',
-    imports: [RouterModule, NgIf, MatFormFieldModule, MatInputModule, MatTableModule, AgGridModule, SpinnerComponent, FormsModule, ReactiveFormsModule, MatSelectModule, MatButtonModule, MatIconModule, AccesibleComponent, NotAccesibleComponent]
+    imports: [RouterModule, NgIf, MatFormFieldModule, MatInputModule, MatTableModule, AgGridModule, FormsModule, ReactiveFormsModule, MatSelectModule, MatButtonModule, MatIconModule, AccesibleComponent, NotAccesibleComponent, NgxUiLoaderModule]
 })
 
 export class AttractionsComponent {
@@ -50,7 +51,7 @@ export class AttractionsComponent {
   })
   
 
-  constructor(private fb:FormBuilder, private router: Router){
+  constructor(private fb:FormBuilder, private router: Router, private ngxService: NgxUiLoaderService){
 
   }
 
@@ -101,6 +102,7 @@ export class AttractionsComponent {
    
   }
   ngOnInit(): void {
+
     this.attService.attractionsChanged.subscribe(() => {
       this.onAttractionsChanged();
     });

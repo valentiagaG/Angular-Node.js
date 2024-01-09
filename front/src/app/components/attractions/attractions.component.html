@@ -37,13 +37,18 @@
     
   
   </div>
+  <!-- <section class="h-screen flex justify-center items-center">
 
-  
-  <div *ngIf="estaCargando()">
-    <section class="h-screen flex justify-center items-center">
-      <app-spinner></app-spinner>
-    </section>
+    <ngx-ui-loader></ngx-ui-loader>
+  </section> -->
+  <div ngxUiLoaderBlurred [loaderId]="'loader-02'">
+    <ngx-ui-loader></ngx-ui-loader>
   </div>
+  <!-- <div *ngIf="estaCargando()">
+    <section class="h-screen flex justify-center items-center">
+      <ngx-ui-loader></ngx-ui-loader> 
+    </section>
+  </div> -->
 
   <!-- <ul>
     @for (attraction of attService.attractions(); track

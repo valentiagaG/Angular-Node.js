@@ -74,10 +74,15 @@
         </div>
       </ngx-slick-carousel>
     </div>
-    <div *ngIf="estaCargando()">
-      <section class=" flex justify-center items-center" style="height: 400px;">
-        <app-spinner></app-spinner>
-      </section>
+    <div ngxUiLoaderBlurred [loaderId]="'loader-01'">
+      <ngx-ui-loader></ngx-ui-loader>
     </div>
+    <!-- <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader> -->
+    <!-- <div *ngIf="estaCargando()">
+      <section >
+       
+      </section>
+    </div> -->
   </div>
+  
 </section>

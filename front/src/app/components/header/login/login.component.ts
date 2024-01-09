@@ -9,11 +9,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import {  MatButtonModule } from '@angular/material/button';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SigninComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule],
+  imports: [SigninComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, NgxUiLoaderModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
