@@ -5,6 +5,8 @@ import { HotelsService } from '../../services/hotels/hotels.service';
 import { FormsModule } from '@angular/forms';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 
 @Component({
@@ -20,6 +22,7 @@ export class HomeComponent {
   responseData: any;
 
   public hotelService = inject (HotelsService);
+  public http = inject(HttpClient)
 
   slideConfig = {
     "slidesToShow": 4,
@@ -46,4 +49,15 @@ export class HomeComponent {
     return this.hotelService.loading();
   }
 
+  triggerApiCall = () => {
+    const requests = [];
+    for (let i = 1, i_len = 2; i < i_len; i++) {
+      // this._ngxUiLoaderService.start();
+      requests.push(this.http.get(`https://jsonplaceholder.typicode.com/posts/${i}`));
+    }
+  
+    forkJoin(requests).subscribe(posts => {
+      posts.forEach(post => console.log(post));
+    });
+  };
 }

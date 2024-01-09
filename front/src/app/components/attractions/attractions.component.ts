@@ -18,7 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 import { CellComponent } from '../cell/cell.component';
 import { AccesibleComponent } from '../cell/Accesible/accesible/accesible.component';
 import { NotAccesibleComponent } from '../cell/NotAccesible/not-accesible/not-accesible.component';
-import { spinnerInterceptor } from '../../interceptors/spinner/spinner.interceptor';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({

@@ -9,11 +9,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-signin',
   standalone: true,
-  imports: [FormsModule, NgIf, LoginComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule],
+  imports: [FormsModule, NgIf, LoginComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatIconModule, NgxUiLoaderModule],
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.css'
 })

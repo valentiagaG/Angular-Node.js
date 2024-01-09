@@ -27,20 +27,6 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, NgxU
 export class AppComponent {
 
   title = 'routing';
-  constructor(
-    private http: HttpClient, private _ngxUiLoaderService: NgxUiLoaderService
-  ) { }
-  
-  triggerApiCall = () => {
-    const requests = [];
-    for (let i = 1, i_len = 2; i < i_len; i++) {
-      // this._ngxUiLoaderService.start();
-      requests.push(this.http.get(`https://jsonplaceholder.typicode.com/posts/${i}`));
-    }
-  
-    forkJoin(requests).subscribe(posts => {
-      posts.forEach(post => console.log(post));
-    });
-  };
+
 
 }

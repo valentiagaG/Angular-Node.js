@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { Observable, finalize } from 'rxjs';
 
-let _activeRequest = 0;
+let _activeRequest = 0; //número de solicitudes HTTP activas en un momento dado.
 export const spinnerInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn):Observable<HttpEvent<unknown>> => {
   let _ngxUiLoaderService = inject(NgxUiLoaderService);
   console.log(req.url);

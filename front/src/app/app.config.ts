@@ -19,11 +19,10 @@ import { AgGridModule } from 'ag-grid-angular';
 import { spinnerInterceptor } from './interceptors/spinner/spinner.interceptor';
 import { NgxUiLoaderHttpModule, NgxUiLoaderRouterModule, NgxUiLoaderService } from 'ngx-ui-loader';
 
-
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }, HttpClientModule, provideHttpClient(withInterceptors([
     errorInterceptor, spinnerInterceptor
-  ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton, AgGridModule, NgxUiLoaderRouterModule, NgxUiLoaderService, NgxUiLoaderHttpModule, { provide: HTTP_INTERCEPTORS, useExisting: spinnerInterceptor, multi: true }]
+  ])), SnackbarComponent, CookieService, AuthService, HotelsService, AttractionsService, provideAnimations(), MatTableDataSource, MatTableModule, MatTable, MatSortModule, SlickCarouselComponent, Validators, MatButton, AgGridModule, NgxUiLoaderRouterModule, NgxUiLoaderService, NgxUiLoaderHttpModule]
 
 
 };

@@ -1,4 +1,7 @@
 <section class="bg-gray-100">
+  <div ngxUiLoaderBlurred [loaderId]="'loader-01'">
+    <ngx-ui-loader></ngx-ui-loader>
+  </div>
   <div class="flex space-x-8 p-10">
     <!-- <img class="img0" src="https://images.pexels.com/photos/848595/pexels-photo-848595.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt=""> -->
     <p class="px-6 text-center">
@@ -74,9 +77,10 @@
         </div>
       </ngx-slick-carousel>
     </div>
-    <div ngxUiLoaderBlurred [loaderId]="'loader-01'">
-      <ngx-ui-loader></ngx-ui-loader>
-    </div>
+    
+    <!-- <div>
+      <button (click)="triggerApiCall()">HTTP Request</button>
+    </div> -->
     <!-- <ngx-ui-loader [loaderId]="'loader-01'"></ngx-ui-loader> -->
     <!-- <div *ngIf="estaCargando()">
       <section >
