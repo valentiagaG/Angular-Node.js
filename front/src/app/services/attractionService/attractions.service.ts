@@ -24,9 +24,6 @@ export class AttractionsService {
   public attractions = computed(() => this.#state().attractions);
   public loading = computed(() => this.#state().loading);
   
-
-  // private attractionsSubject = new BehaviorSubject<Attraction[]>([]);
-  // attractions$: Observable<Attraction[]> = this.attractionsSubject.asObservable();
   constructor() {
     this.loadData();
   }
@@ -39,7 +36,6 @@ export class AttractionsService {
           loading: false,
           attractions: res.body,
         });
-        // this.attractionsSubject.next(res.body);
       });
   }
 
@@ -88,7 +84,6 @@ export class AttractionsService {
           console.log('Atraccion agregada');
         }
       );
-    
       this.attractionsChanged.emit();
   }
 }

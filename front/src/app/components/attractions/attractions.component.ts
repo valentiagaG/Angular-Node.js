@@ -15,10 +15,10 @@ import { GridReadyEvent } from 'ag-grid-community';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-import { CellComponent } from '../cell/cell.component';
 import { AccesibleComponent } from '../cell/Accesible/accesible/accesible.component';
 import { NotAccesibleComponent } from '../cell/NotAccesible/not-accesible/not-accesible.component';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
+import * as XLSX from 'xlsx';
 
 @Component({
     selector: 'app-attractions',
@@ -48,7 +48,7 @@ export class AttractionsComponent {
     aimedTo:[null],
     danger: [null]
   })
-  
+  ExcelData: any;
 
   constructor(private fb:FormBuilder, private router: Router, private ngxService: NgxUiLoaderService){
 
@@ -98,17 +98,16 @@ export class AttractionsComponent {
     if (!this.attService.loading()) {
       this.rowData = this.attService.attractions();
     }
-   
   }
-  ngOnInit(): void {
 
+  ngOnInit(): void {
     this.attService.attractionsChanged.subscribe(() => {
       this.onAttractionsChanged();
     });
   }
 
   onAttractionsChanged(): void {
-    this.rowData = this.attService.attractions();
+    this.rowData = this.attService.attractions().concat(this.ExcelData);
   }
 
   quickSearch() {
@@ -154,13 +153,24 @@ export class AttractionsComponent {
     await this.attService.postAttraction(this.name, this.add, this.acc, this.danger, this.aimedTo);
     this.showSuccessAlert = true;
     this.modalVisible = false;
-  
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
     
   }
 
+  readExcel(event: any){
+
+    let file = event.target.files[0];
+    let fileReader = new FileReader();
+    fileReader.readAsBinaryString(file);
+
+    fileReader.onload = (e) =>{
+      let workBook = XLSX.read(fileReader.result, {type: 'binary'});
+      let SheetNames = workBook.SheetNames;
+      this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[SheetNames[0]]);
+      // console.log(this.ExcelData);
+      this.onAttractionsChanged();
+    }
+
+  }
 }
 
 
