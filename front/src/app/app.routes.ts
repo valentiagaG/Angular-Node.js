@@ -6,10 +6,9 @@ import { SigninComponent } from './components/header/signin/signin.component';
 import { LoginComponent } from './components/header/login/login.component';
 import { AttractionsComponent } from './components/attractions/attractions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { authGuard } from './guards/auth.guard';
+import { authGuard, resolve } from './guards/auth.guard';
 import { LoginMessageComponent } from './components/login-message/login-message.component';
 import { ChartComponent } from './components/chart/chart.component';
-import { AuthService } from './services/auth/auth.service';
 
 export const routes: Routes = [
     {
@@ -31,7 +30,7 @@ export const routes: Routes = [
         canMatch: [authGuard],
         // canActivate: [authGuard],
         component: AttractionsComponent,
-        resolve: {attractions: AuthService}
+        resolve: {attractions: resolve}
     },
     {
         path: 'attractions',

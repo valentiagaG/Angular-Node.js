@@ -103,6 +103,7 @@ export class AttractionsComponent {
   }
 
   ngOnInit(): void {
+    //esto no se si es necesario
     this.activeRoute.queryParamMap.subscribe((data) =>{
       this.allAttractions = this.activeRoute.snapshot.data['attractions'];
     })

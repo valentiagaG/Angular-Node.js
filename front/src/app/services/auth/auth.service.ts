@@ -12,7 +12,7 @@ import { AttractionsService } from '../attractionService/attractions.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService implements Resolve<Attraction[]> {
+export class AuthService {
   
   private readonly baseUrl:string = environments.baseUrl;
   private http = inject( HttpClient);
@@ -23,15 +23,6 @@ export class AuthService implements Resolve<Attraction[]> {
   constructor(private router: Router, private snackBar: SnackbarComponent) {
     
   }
-
-  //esto va a cargar la data antes de navegar a la ruta.
-   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Attraction[] | Observable<Attraction[]> | Promise<Attraction[]> {
-    return this.attService.loadData().pipe(
-      map(() => this.attService.attractions())
-    );
-  }
-
- 
 
   //esta funcion retorna un observable de un booleano
   getAuthToken(): Observable<boolean>{
