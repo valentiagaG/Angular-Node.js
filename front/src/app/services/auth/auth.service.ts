@@ -2,26 +2,36 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, delay, map, of } from 'rxjs';
 import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
-import { UserResponse } from '../../interfaces/req-res';
+import { Attraction, UserResponse } from '../../interfaces/req-res';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
+import { AttractionsService } from '../attractionService/attractions.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements Resolve<Attraction[]> {
   
   private readonly baseUrl:string = environments.baseUrl;
   private http = inject( HttpClient);
-  
   private rta:boolean = false;
   private cookies = inject(CookieService);
+  private attService = inject(AttractionsService);
 
   constructor(private router: Router, private snackBar: SnackbarComponent) {
     
   }
+
+  //esto va a cargar la data antes de navegar a la ruta.
+   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Attraction[] | Observable<Attraction[]> | Promise<Attraction[]> {
+    return this.attService.loadData().pipe(
+      map(() => this.attService.attractions())
+    );
+  }
+
+ 
 
   //esta funcion retorna un observable de un booleano
   getAuthToken(): Observable<boolean>{

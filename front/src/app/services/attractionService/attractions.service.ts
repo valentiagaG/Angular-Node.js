@@ -1,6 +1,6 @@
 import { Injectable, inject, signal, computed, EventEmitter } from '@angular/core';
 import { Attraction, AttractionsList } from '../../interfaces/req-res';
-import { delay } from 'rxjs';
+import { Observable, delay, mapTo, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 interface State {
@@ -19,6 +19,10 @@ export class AttractionsService {
     loading: true,
     attractions: [],
   })
+  // resolve(route: ActivatedRouteSnapshot): Observable<Attraction[]> | Promise<Attraction[]> | Attraction[] {
+  //   this.loadData().subscribe(()=>{
+
+  //   }) ;
 
   //creo una señal computada --> solo de lectura
   public attractions = computed(() => this.#state().attractions);
@@ -28,15 +32,28 @@ export class AttractionsService {
     this.loadData();
   }
 
-  private loadData(): void {
-    this.http.get<AttractionsList>('http://localhost:4000/api/attractions')
-      .pipe(delay(1000))
-      .subscribe((res: { body: Attraction[] }) => {
-        this.#state.set({
-          loading: false,
-          attractions: res.body,
-        });
-      });
+  // loadData(): void {
+  //   this.http.get<AttractionsList>('http://localhost:4000/api/attractions')
+  //     .pipe(delay(1000))
+  //     .subscribe((res: { body: Attraction[] }) => {
+  //       this.#state.set({
+  //         loading: false,
+  //         attractions: res.body,
+  //       });
+  //     });
+  // }
+  loadData(): Observable<void> {
+    return this.http.get<AttractionsList>('http://localhost:4000/api/attractions')
+      .pipe(
+        delay(1000),
+        tap((res: { body: Attraction[] }) => {
+          this.#state.set({
+            loading: false,
+            attractions: res.body,
+          });
+        }),
+        mapTo(undefined)
+      );
   }
 
   name = '';
@@ -86,4 +103,6 @@ export class AttractionsService {
       );
       this.attractionsChanged.emit();
   }
+
+  
 }

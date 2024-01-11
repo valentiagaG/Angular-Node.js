@@ -2,7 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AttractionsService } from '../../services/attractionService/attractions.service';
 import { NgIf } from '@angular/common';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -37,10 +37,12 @@ export class AttractionsComponent {
   public searchValue = '';
   private gridApi: GridApi<any> | undefined;
   autoHeightLayout = 'autoHeight';
-  
+  private activeRoute = inject(ActivatedRoute);
+  public allAttractions: Attraction[] | undefined;
   public paginationPageSize = 10;
   public paginationPageSizeSelector: number[] | boolean = [10, 20, 30];
   
+
   public addAttractionForm: FormGroup = this.fb.group({
     name : ['', [Validators.required]],
     address : ['', [Validators.required]],
@@ -101,6 +103,9 @@ export class AttractionsComponent {
   }
 
   ngOnInit(): void {
+    this.activeRoute.queryParamMap.subscribe((data) =>{
+      this.allAttractions = this.activeRoute.snapshot.data['attractions'];
+    })
     this.attService.attractionsChanged.subscribe(() => {
       this.onAttractionsChanged();
     });

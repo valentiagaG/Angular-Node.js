@@ -9,6 +9,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { authGuard } from './guards/auth.guard';
 import { LoginMessageComponent } from './components/login-message/login-message.component';
 import { ChartComponent } from './components/chart/chart.component';
+import { AuthService } from './services/auth/auth.service';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
         canMatch: [authGuard],
         // canActivate: [authGuard],
         component: AttractionsComponent,
+        resolve: {attractions: AuthService}
     },
     {
         path: 'attractions',
