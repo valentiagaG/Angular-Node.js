@@ -52,9 +52,7 @@ export class AttractionsComponent {
   })
   ExcelData: any;
 
-  constructor(private fb:FormBuilder, private router: Router, private ngxService: NgxUiLoaderService){
-
-  }
+  constructor(private fb:FormBuilder, private router: Router, private ngxService: NgxUiLoaderService){  }
 
   hide = true;
 
@@ -107,9 +105,6 @@ export class AttractionsComponent {
     this.activeRoute.queryParamMap.subscribe((data) =>{
       this.allAttractions = this.activeRoute.snapshot.data['attractions'];
     })
-    this.attService.attractionsChanged.subscribe(() => {
-      this.onAttractionsChanged();
-    });
   }
 
   onAttractionsChanged(): void {
