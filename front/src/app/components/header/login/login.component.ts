@@ -14,7 +14,7 @@ import { NgxUiLoaderModule } from 'ngx-ui-loader';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [SigninComponent, RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, NgxUiLoaderModule],
+  imports: [RouterModule, RouterOutlet, FormsModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, NgxUiLoaderModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

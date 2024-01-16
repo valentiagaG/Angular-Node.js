@@ -12,9 +12,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
 import { ChartComponent } from './components/chart/chart.component';
-import { HttpClient } from '@angular/common/http';
-import { forkJoin } from 'rxjs';
-import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, NgxUiLoaderService } from 'ngx-ui-loader';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +25,5 @@ import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule, NgxU
 export class AppComponent {
 
   title = 'routing';
-
 
 }

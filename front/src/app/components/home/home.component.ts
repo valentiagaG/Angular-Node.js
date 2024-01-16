@@ -1,5 +1,4 @@
 import { Component, ViewChild, inject } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
 import {NgFor, NgIf} from '@angular/common';
 import { HotelsService } from '../../services/hotels/hotels.service';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +13,7 @@ import { forkJoin } from 'rxjs';
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, FormsModule, NgIf, NgFor, SlickCarouselModule, NgxUiLoaderModule]
+    imports: [FormsModule, NgIf, NgFor, SlickCarouselModule, NgxUiLoaderModule]
 })
 
 export class HomeComponent {

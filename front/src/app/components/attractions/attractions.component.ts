@@ -9,8 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { Attraction } from '../../interfaces/req-res';
 import { AgGridModule, ICellRendererAngularComp } from 'ag-grid-angular'; // Angular Grid Logic
 import { ColDef, GridApi, ICellRendererParams } from 'ag-grid-community'; // Column Definitions Interface
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
+// import 'ag-grid-community/styles/ag-grid.css';
+// import 'ag-grid-community/styles/ag-theme-quartz.css';
 import { GridReadyEvent } from 'ag-grid-community';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';

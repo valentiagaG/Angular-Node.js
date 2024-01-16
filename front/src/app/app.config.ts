@@ -7,7 +7,7 @@ import { provideRouter } from '@angular/router';
 import { AuthService } from './services/auth/auth.service';
 import { HotelsService } from './services/hotels/hotels.service';
 import { AttractionsService } from './services/attractionService/attractions.service';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';

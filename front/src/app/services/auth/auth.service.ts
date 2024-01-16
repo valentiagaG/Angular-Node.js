@@ -2,9 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, delay, map, of } from 'rxjs';
 import { environments } from '../../../assets/environments/environments';
 import { HttpClient } from '@angular/common/http';
-import { Attraction, UserResponse } from '../../interfaces/req-res';
+import { UserResponse } from '../../interfaces/req-res';
 import { CookieService } from 'ngx-cookie-service';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { SnackbarComponent } from '../../components/snackbar/snackbar.component';
 import { AttractionsService } from '../attractionService/attractions.service';
 
@@ -18,7 +18,6 @@ export class AuthService {
   private http = inject( HttpClient);
   private rta:boolean = false;
   private cookies = inject(CookieService);
-  private attService = inject(AttractionsService);
 
   constructor(private router: Router, private snackBar: SnackbarComponent) {
     
